@@ -1,0 +1,226 @@
+<?php
+class FarmLayout{
+public static $farmlayout = array(
+	0=>array(
+		'fid'=>5432654,
+		'uid'=>3277685,
+		'name'=>'SweetHome',
+		'built_time'=>1411645000,
+		'style'=>'aisa:hui',
+		'type'=>'apple',
+		'price'=>100,
+		'lon'=>90.0,
+		'lat'=>0.0,
+		'alt'=>0.0,
+		'days_gone'=>0,
+		'clock_off'=>0,
+
+		//activity:系统中所有活动的集合
+		//1:通用活动:系统中所有建筑通用活动的集合
+		//建造（Building），升级(Upgrading)，移动(moving)，回收(recycling)
+		//2:周期活动:系统中所有周期性建筑活动的集合
+		//例如，某些建筑每隔一小时自动产生文化
+		//例如，仓库每小时扣掉水果
+
+		'activity'=>array(
+			0=>array(
+				'i'=>0,
+				't'=>'YearActivity',
+				'q'=>3,
+				'jobs'=>array(
+					array('name'=> 'WheatGrow','cost'=>array('Water'=>3),'gain'=>array('Wheat'=>7),'initime'=> 1411645000,'prog'=> 2,'duration' =>60,'ct'=>0,'cd'=>30,'cc'=>0,'count' =>1,'state' =>2,),
+				),
+				'jqes'=>array(),
+				'jops'=>array(),
+			),
+
+		),
+
+		//storage:系统中所有仓储的集合，每个元素是一个仓储
+		//这里的仓储只是一个虚拟的概念。
+		//sotrage这个类依赖于StorageConfig.GetiSize( iName)来获得某个i的占据大小
+		'storage'=>array(
+			0=>array(
+				'i'	=>0,
+				'v'	=>1,
+				't' =>'LogicStorage',
+				's' =>300,
+				'e'=>array('Cult+'=>30,'Tech+'=>12,'Hapy+'=>8,'Gold-'=>-30),
+			),
+			1=>array(
+				'i'	=>1,
+				'v'	=>1,
+				't' =>'GoldStorage',
+				's'=>800,
+				'e'=>array('Gold'=>800),
+				),
+
+			2=>array(
+				'i'	=>2,
+				'v'	=>1,
+				't' =>'CultStorage',
+				's'=>300,
+				'e'=>array('Cult'=>300,),
+				),
+			3=>array(
+				'i'	=>3,
+				'v'	=>1,
+				't' =>'TechStorage',
+				's'=>79,
+				'e'=>array('Tech'=>79,),
+				),
+			4=>array(
+				'i'	=>4,
+				'v'	=>1,
+				't' =>'HapyStorage',
+				's'=>65,
+				'e'=>array('Hapy'=>65),
+				),
+			5=>array(
+				'i'	=>5,
+				'v'	=>1,
+				't' =>'FoodStorage',
+				's'=>800,
+				'e'=>array('Apple'=>8,'Banana'=>3,'Wheat'=>7,'Corn'=>23,'PigFeed'=>28,'Cult'=>90,'HenFeed'=>8,'CowFeed'=>7,'PigFeed'=>4,),
+			),
+		),
+
+		//t=type, i=id, v=level, s=state, h=hprate, d=store
+		//如果state是none,表明这个建筑是删掉的建筑。
+		//Building要写在Activity之前
+		//Building的v属性在设计的时候要注意把v设为0表示1级。
+		'barsobj'=>array(
+			0=>array('i'=>0,'t'=>'Hall'			,'r'=>64,	'c'=>64,	'v'=>0,	's'=>3,'w'=>300,'h'=>0.54,'d'=>-1,'a'=>-1),
+			1=>array('i'=>1,'t'=>'Jucier'		,'r'=>60,	'c'=>57,	'v'=>0,	's'=>3,'w'=>200,'h'=>0.54,'d'=>-1,'a'=>-1),
+			2=>array('i'=>2,'t'=>'Winery'		,'r'=>60,	'c'=>57,	'v'=>0,	's'=>3,'w'=>200,'h'=>0.54,'d'=>-1,'a'=>-1),
+			3=>array('i'=>3,'t'=>'BerryField'	,'r'=>38,	'c'=>64,	'v'=>0,	's'=>3,'w'=>200,'h'=>0.54,'d'=>-1,'a'=>0 ),
+			4=>array('i'=>4,'t'=>'Shop'			,'r'=>43,	'c'=>43,	'v'=>0,	's'=>3,'w'=>200,'h'=>0.54,'d'=>-1,'a'=>-1 ),
+			5=>array('i'=>5,'t'=>'Golder'		,'r'=>105,	'c'=>18,	'v'=>0,	's'=>3,'w'=>200,'h'=>0.54,'d'=> 1,'a'=>-1 ),
+			6=>array('i'=>6,'t'=>'Barn'			,'r'=>67,	'c'=>85,	'v'=>0,	's'=>3,'w'=>200,'h'=>0.54,'d'=>-1,'a'=>-1 ),
+		),	
+
+
+
+		'resource'=>array(
+			'Cult'				=>array('c'=>300 ,'k'=>5,'s'=>array(1),),
+			'Tech'				=>array('c'=> 79 ,'k'=>5,'s'=>array(2),),
+			'Hapy'				=>array('c'=> 79 ,'k'=>5,'s'=>array(3),),
+			'Gold'				=>array('c'=> 79 ,'k'=>5,'s'=>array(4),),
+			'Wheat'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Corn'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Bean'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Rice'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Cane'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Indigo'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Pumpkin'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Tomato'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Potato'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Berry'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Apple'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Peach'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Coco'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Oliver'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Lemon'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Cherry'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Mango'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Grape'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'CoffeeBean'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Tea'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Silk'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Egg'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Milk'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Wool'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Bacon'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Fillet'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Cream'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Butter'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Cheese'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Sugar'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Syrup'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Honey'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Beewax'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'OliverOil'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'SoySauce'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Mayonnaise'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'LemonCurd'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'IceCream'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Jucie'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Mocha'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Latte'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Coffee'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Smoothie'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'HotChocolate'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'MilkTea'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Genmaicha'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'GreyTea'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'PinotNoir'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Chardonnay'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Mead'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Beer'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Rum'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'MilkWine'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Cocktail'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Bread'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Cookie'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Muffin'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Waffle'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Pizza'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'ApplePie'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'CaramelApple'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Toffee'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'chocolate'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'lollipop'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'JellyBean'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Salad'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'BaconEgg'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Sushi'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'FishChips'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Hamburger'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Sandwich'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Cake'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'CottonFabric'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'FlaskFabrik'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'SilkFabrik'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'BlueFabric'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'RedFabric'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'YellowFabric'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Shirt'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Dress'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Blancket'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Pillow'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Scarf'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Hat'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Sweat'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'GoldOre'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'SilverOre'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'CoalOre'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'DiamondOre'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'GoldBar'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'SilverBar'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'IronBar'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'RefinedCoal'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'GoldCoin'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'SilverCoin'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Cult'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Candle'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'BerryCandle'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'LemonCandle'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'IndigoCandle'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'GoldRing'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'SilverRing'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'IronRing'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'PlatinumRing'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'DiamondRing'		=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Lumber'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Stone'				=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Marble'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Cranite'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'Diamond'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+			'IronOre'			=>array('c'=>1000,'k'=>5,'s'=>array(5),),
+
+		),
+
+
+		)
+	);
+}
